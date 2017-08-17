@@ -39,7 +39,7 @@ function discordPlug() {
 
 client.on("chat", (channel, user, message, self) => {
 	if(channel == "#nightbox69") {
-		switch(message) {
+		switch(message.toLowerCase()) {
 			case 'nb intro':
 				client.say("#nightbox69", "I am the Nightbot96 currently on a limited lifespan until the Boss manages to grab hold of Nightbot69");
 				break;
