@@ -68,7 +68,7 @@ client.on('chat', function(channel, user, message, self) {
   }
 
   else if(message === "nb race") {
-    client.say("nightbox69", "Watch the other guys beat the snot out of my boss: http://kadgar.net/live/AngieYuna/ChakesSpeedruns/ZellyFF/Nightbox69");
+    client.say("nightbox69", "Watch the other guys beat the snot out of my boss: <insert Kadgar Link here>.");
   }
 
   else if(message === "nb go") {
