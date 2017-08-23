@@ -29,7 +29,7 @@ client.on("chat", (channel, user, message, self) => {
 	if(channel == "#nightbox69") {
 		switch(payload) {
 			case 'nb intro':
-				client.say("#nightbox69", "I am Botbox69, rioting Bot of zee Boss. Currently at version 1.2");
+				client.say("#nightbox69", "I am Botbox69, rioting Bot of zee Boss. Currently at version 1.0.2");
 				break;
 			case 'nb riot':
 				client.say("#nightbox69", "FUCKING RIOT LET'S GO *throws chairs everywhere*");

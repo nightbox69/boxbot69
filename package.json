@@ -1,6 +1,6 @@
 {
   "name": "nightbot69",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Twitch chatbot for Nightbox69",
   "main": "bot.js",
   "scripts": {
