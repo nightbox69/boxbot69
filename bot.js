@@ -43,18 +43,16 @@ client.on("chat", (channel, user, message, self) => {
 			case 'nb race':
 				client.say("nightbox69", "Watch the other guys beat the snot out of my boss: <insert Kadgar Link here>.");
 				break;
-			case 'nb plug':
+			/* case 'nb plug':
 				if(user.username === "nightbox69" && hasPlugged == false) {
 		      client.say("nightbox69", "You actually want me to advertise on your channel?? Sure. Kappa");
-		      setInterval(twitterPlug, 1805000);
-		      setInterval(discordPlug, 1810000);
 		      hasPlugged = true;
 		    } else if (user.username === "nightbox69" && hasPlugged == true) {
 		      client.say("nightbox69", "Error Found: Attempting to Plug more Ads.");
 		    } else {
 		    	client.say("nightbox69", "Error Found: Attempting to Plug Annoying Strimmer.");
 		    }
-				break;
+				break; */
 			case 'kappa':
 				emoteCounter = emoteCounter + 1;
 				if(emoteCounter == intervalEmote) {
@@ -123,7 +121,9 @@ client.on("hosting", function (channel, target, viewers) {
 client.on('connected', function(address, port) {
   if(hasConnected == false) {
   	client.say("nightbox69", "I'm awake boss, I'm awake. Stop nudging the command prompt you sick man.");
-  	setInterval(shamelessPlug, 1800000); //1800000
+  	setInterval(shamelessPlug, 3600000);
+  	setInterval(twitterPlug, 3610000);
+		setInterval(discordPlug, 3620000);
   	hasConnected = true;
   } else {
   	client.say("#nightbox69", "Error: Connection was interrupted. I highly suggest refreshing the strim so you can see Boss's frustrated face. Kappa.");
