@@ -1,7 +1,7 @@
-Nightbot96
+Botbox69
 ==============
 
-An annoying twitch bot. Not to be confused with the actual Nightbot. This is a wordplay.
+An annoying twitch bot. Made to be annoying, by the annoying.
 
 Current Features
 ----------------
