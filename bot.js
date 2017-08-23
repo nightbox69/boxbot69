@@ -24,6 +24,7 @@ hasPlugged = false;
 
 client.connect();
 
+// Chat Commands
 client.on("chat", (channel, user, message, self) => {
 	var payload = message.toLowerCase();
 	if(self) return;
@@ -91,6 +92,7 @@ client.on("chat", (channel, user, message, self) => {
 	}
 });
 
+// Whisper Commands
 client.on("whisper", function (from, userstate, message, self) {
 	var payload = message.toLowerCase();
 	if (self) return;
@@ -110,23 +112,18 @@ client.on("whisper", function (from, userstate, message, self) {
 	}
 });
 
-client.on("message", function (channel, userstate, message, self) {
-	var payload = message.toLowerCase();
-	if(self) return;
-	client.whisper("username", "Your message");
-	if(userstate["message-type"] == "whisper") {
-		
-	}
-});
-
+// Subscription Notification
 client.on("subscription", function (channel, username, method, message, userstate) {
 	client.say("nightbox69", "BOSS BOSS!" + username + " CONTRIBUTED TO YOUR FEEDING PROGRAM! Thank you for the food!")
 });
 
+// Bits Notification
 client.on("cheer", function (channel, userstate, message) {
 	client.say("nightbox69", "Wow!" + userstate + "bits! Thanks for the food!");
 });
 
+
+// Host Notification
 client.on("hosted", function(channel, username, viewers, autohost) {
 	if(autohost == true) {
   	client.say("nightbox69", "Mr. / Ms. / Mrs. / It " + username +  " has autohosted us with " + viewers + "people! BUT WHY?!! DansGame");
@@ -135,14 +132,17 @@ client.on("hosted", function(channel, username, viewers, autohost) {
   }
 });
 
+// ReSubscription Notification
 client.on("resub", function (channel, username, months, message, userstate, methods) {
-	client.say("nightbox69", "Oi, " + username + ", thanks for the " + months + " of sponsoring MY FOOD");
+	client.say("nightbox69", "Oi, " + username + ", thanks for the " + months + " of sponsoring the BOSS'S FOOD");
 });
 
+// Hosting Notification
 client.on("hosting", function (channel, target, viewers) {
 	client.say("nightbox69", "Hosting Strimmer " + target + ". Let's watch and enjoy!");
 });
 
+// Connection Announcement and Bot Plugs (1 Hour Interval)
 client.on('connected', function(address, port) {
   if(hasConnected == false) {
   	client.say("nightbox69", "I'm awake boss, I'm awake. Stop nudging the command prompt you sick man.");
