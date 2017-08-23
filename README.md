@@ -7,6 +7,7 @@ Current Features
 ----------------
 
 	Bot Commands
+	Whisper Commands
 	Host Notifications
 	Sub Notifications
 	Emote Counter
@@ -32,4 +33,4 @@ Installation and Usage
 Future Upgrades
 ---------------
 
-	Whisper commands
+	More Commands.
