@@ -26,10 +26,11 @@ client.connect();
 
 client.on("chat", (channel, user, message, self) => {
 	var payload = message.toLowerCase();
+	if(self) return;
 	if(channel == "#nightbox69") {
 		switch(payload) {
 			case 'nb intro':
-				client.say("#nightbox69", "I am Botbox69, rioting Bot of zee Boss. Currently at version 1.0.2");
+				client.say("#nightbox69", "I am Botbox69, rioting Bot of zee Boss. Currently at version 1.3.0");
 				break;
 			case 'nb riot':
 				client.say("#nightbox69", "FUCKING RIOT LET'S GO *throws chairs everywhere*");
@@ -42,6 +43,12 @@ client.on("chat", (channel, user, message, self) => {
 				break;
 			case 'nb race':
 				client.say("nightbox69", "Watch the other guys beat the snot out of my boss: <insert Kadgar Link here>.");
+				break;
+			case 'nb pb':
+				client.say("nightbox69", "Final Fantasy X - Any%: 9h 43m 45s");
+				break;
+			case 'nb wr':
+				client.say("nightbox69", "Final Fantasy X - Any%: 9h 20m 00s by Flobberworm4");
 				break;
 			case 'kappa':
 				emoteCounter = emoteCounter + 1;
@@ -84,6 +91,34 @@ client.on("chat", (channel, user, message, self) => {
 	}
 });
 
+client.on("whisper", function (from, userstate, message, self) {
+	var payload = message.toLowerCase();
+	if (self) return;
+	switch(payload) {
+		case 'nb intro':
+			client.whisper(from, "I am Botbox69, rioting Bot of zee Boss. Currently at version 1.3.0");
+			break;
+		case 'nb race':
+			client.whisper(from, "Watch the other guys beat the snot out of my boss: <insert Kadgar Link here>.");
+			break;
+		case 'nb pb':
+			client.whisper(from, "Final Fantasy X - Any%: 9h 43m 45s");
+			break;
+		case 'nb wr':
+			client.whisper(from, "Final Fantasy X - Any%: 9h 20m 00s by Flobberworm4");
+			break;
+	}
+});
+
+client.on("message", function (channel, userstate, message, self) {
+	var payload = message.toLowerCase();
+	if(self) return;
+	client.whisper("username", "Your message");
+	if(userstate["message-type"] == "whisper") {
+		
+	}
+});
+
 client.on("subscription", function (channel, username, method, message, userstate) {
 	client.say("nightbox69", "BOSS BOSS!" + username + " CONTRIBUTED TO YOUR FEEDING PROGRAM! Thank you for the food!")
 });
@@ -120,6 +155,7 @@ client.on('connected', function(address, port) {
   }
 });
 
+// SOCIAL MEDIA AND TWITCH PLUGS
 function shamelessPlug() {
   client.say("nightbox69", "If you guys actually managed to like boss's stream (a statistical impossibility) consider hitting the follow button for more moronic speedruns that will hold no bearing to World Record. Kappa");
 };
