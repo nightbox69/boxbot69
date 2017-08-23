@@ -9,7 +9,7 @@ options = {
     reconnect: true
 	},
 	identity: {
-		username: 'nightbot96', // change this username
+		username: 'boxbot69', // change this username
 		password: authen.password // create an exports.password in oauth.js
 	},
 	channels: ['#nightbox69']
@@ -43,16 +43,6 @@ client.on("chat", (channel, user, message, self) => {
 			case 'nb race':
 				client.say("nightbox69", "Watch the other guys beat the snot out of my boss: <insert Kadgar Link here>.");
 				break;
-			/* case 'nb plug':
-				if(user.username === "nightbox69" && hasPlugged == false) {
-		      client.say("nightbox69", "You actually want me to advertise on your channel?? Sure. Kappa");
-		      hasPlugged = true;
-		    } else if (user.username === "nightbox69" && hasPlugged == true) {
-		      client.say("nightbox69", "Error Found: Attempting to Plug more Ads.");
-		    } else {
-		    	client.say("nightbox69", "Error Found: Attempting to Plug Annoying Strimmer.");
-		    }
-				break; */
 			case 'kappa':
 				emoteCounter = emoteCounter + 1;
 				if(emoteCounter == intervalEmote) {
