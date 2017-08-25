@@ -21,6 +21,7 @@ chatCounter = 0,
 intervalChat = 50,
 hasConnected = false;
 hasPlugged = false;
+raceTracker = false;
 
 client.connect();
 
@@ -43,13 +44,41 @@ client.on("chat", (channel, user, message, self) => {
 				client.say("#nightbox69", "How about YOU SHUT UP AND DO YOUR SPEEDRUNS HUH??");
 				break;
 			case 'nb race':
-				client.say("nightbox69", "Watch the other guys beat the snot out of my boss: <insert Kadgar Link here>.");
+				if(raceTracker == true) {
+					client.say("nightbox69", "Watch the other guys beat the snot out of my boss: <insert Kadgar Link here>.");
+				} else {
+					client.say("nightbox69", "Boss is too scared to race.");
+				}
 				break;
 			case 'nb pb':
-				client.say("nightbox69", "Final Fantasy X - Any%: 9h 43m 45s");
+				client.say("nightbox69", "Final Fantasy X - PC(Any%): 9h 43m 45s");
 				break;
 			case 'nb wr':
-				client.say("nightbox69", "Final Fantasy X - Any%: 9h 20m 00s by Flobberworm4");
+				client.say("nightbox69", "Final Fantasy X - PC(Any%): 9h 20m 00s by Flobberworm4");
+				break;
+			case 'nb clear':
+				if(user.username === "nightbox69") {
+					client.clear("nightbox69");
+					setTimeout(clearChat, 3000);
+				} else {
+					client.say("nightbox69", "You trying something? Keepo");
+				}
+				break;
+			case 'nb racesetup':
+				if(user.username === "nightbox69") {
+					raceTracker = true;
+					client.say("nightbox69", "A race, huh? Think you can keep up?");
+				} else {
+					client.say("nightbox69", "You trying something? Keepo");
+				}
+				break;
+			case 'nb racedown':
+				if(user.username === "nightbox69") {
+					raceTracker = false;
+					client.say("nightbox69", "Everybody died?! DansGame");
+				} else {
+					client.say("nightbox69", "You trying something? Keepo");
+				}
 				break;
 			case 'kappa':
 				emoteCounter = emoteCounter + 1;
@@ -109,19 +138,20 @@ client.on("whisper", function (from, userstate, message, self) {
 		case 'nb wr':
 			client.whisper(from, "Final Fantasy X - Any%: 9h 20m 00s by Flobberworm4");
 			break;
+		default:
+			break;
 	}
 });
 
 // Subscription Notification
-client.on("subscription", function (channel, username, method, message, userstate) {
+client.on("subscription", function(channel, username, method, message, userstate) {
 	client.say("nightbox69", "BOSS BOSS!" + username + " CONTRIBUTED TO YOUR FEEDING PROGRAM! Thank you for the food!")
 });
 
 // Bits Notification
 client.on("cheer", function (channel, userstate, message) {
-	client.say("nightbox69", "Wow!" + userstate + "bits! Thanks for the food!");
+	client.say("nightbox69", "Wow!" + userstate + "bits! Thanks for the food contribution!");
 });
-
 
 // Host Notification
 client.on("hosted", function(channel, username, viewers, autohost) {
@@ -133,7 +163,7 @@ client.on("hosted", function(channel, username, viewers, autohost) {
 });
 
 // ReSubscription Notification
-client.on("resub", function (channel, username, months, message, userstate, methods) {
+client.on("resub", function(channel, username, months, message, userstate, methods) {
 	client.say("nightbox69", "Oi, " + username + ", thanks for the " + months + " of sponsoring the BOSS'S FOOD");
 });
 
@@ -142,13 +172,13 @@ client.on("hosting", function (channel, target, viewers) {
 	client.say("nightbox69", "Hosting Strimmer " + target + ". Let's watch and enjoy!");
 });
 
-// Connection Announcement and Bot Plugs (1 Hour Interval)
+// Connection Announcement and Bot Plugs (1 Hour Interval with 30 second intervals in between)
 client.on('connected', function(address, port) {
   if(hasConnected == false) {
   	client.say("nightbox69", "I'm awake boss, I'm awake. Stop nudging the command prompt you sick man.");
-  	setInterval(shamelessPlug, 3600000);
-  	setInterval(twitterPlug, 3610000);
-		setInterval(discordPlug, 3620000);
+  	setInterval(followPlug, 3600000);
+  	setInterval(twitterPlug, 3630000);
+		setInterval(discordPlug, 3660000);
   	hasConnected = true;
   } else {
   	client.say("#nightbox69", "Error: Connection was interrupted. I highly suggest refreshing the strim so you can see Boss's frustrated face. Kappa.");
@@ -156,7 +186,7 @@ client.on('connected', function(address, port) {
 });
 
 // SOCIAL MEDIA AND TWITCH PLUGS
-function shamelessPlug() {
+function followPlug() {
   client.say("nightbox69", "If you guys actually managed to like boss's stream (a statistical impossibility) consider hitting the follow button for more moronic speedruns that will hold no bearing to World Record. Kappa");
 };
 
@@ -166,4 +196,8 @@ function twitterPlug() {
 
 function discordPlug() {
   client.say("nightbox69", "Zee Boss has a discord channel. Shame on him but do join! https://discord.gg/Gw5r9S6");
+}
+
+function clearChat() {
+	client.say("nightbox69", "Chat has been cleared. You're welcome Boss. Kappa");
 }
