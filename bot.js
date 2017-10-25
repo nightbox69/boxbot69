@@ -149,7 +149,9 @@ client.on("chat", (channel, user, message, self) => {
 				if(message.includes("Kappa") && user.username != "botbox69") {
 					emoteCounter = emoteCounter + 1;
 					if(emoteCounter == intervalEmote) {
-						client.say("#nightbox69", "HOLY SHIT " + user.username + " IS THE GOD OF Kappa (" + intervalEmote + "+)");
+						emoteString = "HOLY SHIT " + user.username + " IS THE GOD OF THE"
+						emoteCaps = emoteString.toLocaleUpperCase();
+						client.say("#nightbox69", emoteCaps + " Kappa -verse (" + intervalEmote + "+)");
 						intervalEmote = intervalEmote + (Math.floor((Math.random() * 50) + 1));
 					}
 				}
