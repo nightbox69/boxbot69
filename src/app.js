@@ -1,7 +1,8 @@
 import tmi from 'tmi.js';
 import { USERNAME, TOKEN, CHANNEL } from './oauth';
 import * as commands from './commands';
-import * as plugs from './plugs'
+import * as plugs from './plugs';
+import * as alerts from './alerts';
 
 const client = new tmi.Client({
 	options: { debug: true, messagesLogLevel: 'info' },
@@ -23,7 +24,8 @@ var chatCounter = 0;
 var intervalChat = Math.floor((Math.random() * 50) + 1);
 var raceTracker = false;
 var dadChecker = false;
-var dadMod = true;
+var dadMod = false;
+var winner = '';
 var benggaCheck = false;
 var raeCheck = false;
 var kitzCheck = false;
@@ -32,7 +34,7 @@ var mochieCheck = false;
 // Connect Bot to Chat
 client.connect().then((data) => {
     console.log(`Bot has started.`);
-    // setTimeout(function() { client.say('nightbox69', `I\'m awake boss, I\'m awake. Stop nudging the command prompt you old dying man.`); }, 5000);
+    setTimeout(function() { client.say('nightbox69', `I\'m awake boss, I\'m awake. Stop nudging the command prompt you old dying man.`); }, 5000);
 }).catch(console.error);
 
 // console.log reconnections
@@ -62,6 +64,7 @@ client.on('message', (channel, userstate, message, self) => {
       case 'bot off':
         commands.disconnect(client);
       break;
+
       // Memes
       case 'sandwich':
         var userName = userstate.username;
@@ -86,21 +89,23 @@ client.on('message', (channel, userstate, message, self) => {
       case 'sammich':
         commands.sammich(client);
       break;
-//      case 'dad on':
-//        if(userstate.mod == true || userstate.badges.broadcaster == '1') {
-//          client.say(channel, 'nb dad is up. Kappa');
-//          dadMod = on;
-//        } else {
-//          client.say(channel, 'You were trying something? Kappa');
-//        }
-//      break;
+      case 'dad on':
+        if(userstate.mod == true || userstate.badges.broadcaster == '1') {
+          client.say(channel, 'nb dad is up. Kappa');
+          dadMod = true;
+        } else {
+          client.say(channel, 'You were trying something? Kappa');
+        }
+      break;
       case 'dad':
-        if(commands.checker == true) {
+        if(commands.nbDad.dadChecker == true) {
           dadChecker = true;
-          client.say(channel,'App: ' + dadChecker);
+          winner = commands.nbDad.someScrub;
+        } else {
+          dadChecker = false;
         }
         var userName = userstate.username;
-        commands.nbDad(client, userName, dadMod, dadChecker);
+        commands.nbDad(client, userName, dadMod, dadChecker, winner);
       break;
 
       // Plugs
@@ -134,16 +139,17 @@ client.on('message', (channel, userstate, message, self) => {
     }
   }
 
-  if((payload.includes('petmalu') || payload.includes('werpa')) && + userstate.mod == false) {
+  if((payload.includes('petmalu') || payload.includes('werpa')) && userstate.mod == false) {
     client.say(channel, `/timeout ${ userstate.username } 1`);
     client.say(channel, 'You were saying something? Kappa');
-    client.action('nightbox69', `hands ${ userstate.username } a dictionary. Kappa`);
+    client.action(channel, `hands ${ userstate.username } a dictionary. Kappa`);
   }
 
-  if(userstate.username != 'botbox69') {
+  if(userstate.username != 'botbox69' || userstate.username != 'nightbox69') {
     chatCounter = chatCounter + 1;
   }
 
+  // Friend Plugs
   if(userstate.username == 'rebengga' && benggaCheck == false) {
     plugs.rebengga(client);
     benggaCheck = true;
@@ -166,37 +172,44 @@ client.on('message', (channel, userstate, message, self) => {
 
   if(chatCounter == intervalChat) {
     var annoyCounter = Math.floor((Math.random() * 7) + 1);
-    switch(annoyCounter) {
-      case 1:
-        client.say(channel, `Can you believe someone is ACTUALLY TALKING to you right now boss? Or maybe it's just me. Kappa`);
-        break;
-      case 2:
-        client.say(channel, 'Sometimes, I wonder why people would even bother watching this stream. This run is total shit. Keepo');
-        break;
-      case 3:
-        client.say(channel, 'PJSalt RESET HYPE PJSalt');
-        break;
-      case 4:
-        client.say(channel, 'I must suggest that you guys leave my poor boss alone, talking must be quite a task for him. Kappa');
-        break;
-      case 5:
-        client.say(channel, 'I DECLARE A MOMENT OF SILENCE. PogChamp My Boss is about to fuck up somewhere. PogChamp');
-        break;
-      case 6:
-        client.say(channel, 'Boss, I have 69 reasons to quit botting for you and this run is one of them FailFish');
-        break;
-      case 7:
-        client.say(channel, 'BOSS I DEMAND A VACATION. Botting for you is a terribly frustrating and boring job.');
-        break;
-    }
+    commands.chatInterval(client, annoyCounter);
     intervalChat = intervalChat + Math.floor((Math.random() * 200) + 1);
   }
 });
 
-function reconnectHandler () {
-  console.log('Reconnecting...')
-}
+// Alerts
+client.on('hosted', (channel, username, viewers, autohost) => {
+  alerts.hostedHandler(channel, username, viewers, autohost);
+})
 
-export function setChecker() {
-  dadChecker = true;
+client.on('subscription', (channel, username, method, message, userstate) => {
+  alerts.subscriptionHandler(client, channel, username, method, message, userstate);
+})
+
+client.on('raided', (channel, username, viewers) => {
+  alerts.alerts.raidedHandler(client, channel, username, viewers);
+})
+
+client.on('cheer', (channel, userstate, message) => {
+  alerts.cheerHandler(client, channel, userstate, message);
+})
+
+client.on('giftpaidupgrade', (channel, username, sender, userstate) => {
+  alerts.giftPaidUpgradeHandler(client, channel, username, sender, userstate);
+})
+
+client.on('hosting', (channel, target, viewers) => {
+  alerts.hostingHandler(client, channel, target, viewers);
+})
+
+client.on('resub', (channel, username, months, message, userstate, methods) => {
+  alerts.resubHandler(client, channel, username, months, message, userstate, methods);
+})
+
+client.on('subgift', (channel, username, streakMonths, recipient, methods, userstate) => {
+  alerts.subGiftHandler(client, channel, username, streakMonths, recipient, methods, userstate);
+})
+
+function reconnectHandler () {
+  console.log('Reconnecting...');
 }

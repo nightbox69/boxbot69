@@ -23,8 +23,12 @@ Installation and Usage
 
 	Install Node.js 
 	Enter 'npm install' in the command line inside the folder.
-	Create an 'oauth.js' file with this line exports.password = "<your oauth token to your channel>"; (Take note that the your oauth should be the oauth code of your bot's twitch account)
-	Enter 'node bot.js' in the command line inside the folder.
+	Create an 'oauth.js' file in src with the following Lines (Take note that the your oauth should be the oauth code of your bot's twitch account):
+
+	Enter 'node .' in the command line inside the folder.
+  export const USERNAME = <bot username>;
+  export const TOKEN = <bot oauth token>;
+  export const CHANNEL = '<channel username where the mod will be modding>';
 
 	Side Notes: 
 	You should prolly be changing nightbox69 to the name of channel or else you'll be spamming my twitch channel.
