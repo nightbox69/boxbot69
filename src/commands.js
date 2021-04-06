@@ -56,9 +56,16 @@ export function notes(client) {
   client.say(channel, `The boss's speedrun notes are found here: https://github.com/nightbox69/Speedruns . It currently only has the outdated version of Chrono Cross, and his current notes for FFX but will slowly expand when he feels like doing another.`);
 }
 
+export function werpa() {
+  client.say(channel, `/timeout ${ userstate.username } 1`);
+  client.say(channel, 'You were saying something? Kappa');
+  client.action(channel, `hands ${ userstate.username } a dictionary. Kappa`);
+}
+
 export function nbDad(client, userName, dadMod, dadChecker, dadCounter, winner) {
   if(dadMod == true) {
       var scrub = userName;
+      var winnerScrub = winner;
       var dadCounter = Math.floor((Math.random() * 40) + 1);
       if(dadCounter == 1 && dadChecker == false) {
           var someLoserScrub = scrub
@@ -70,7 +77,7 @@ export function nbDad(client, userName, dadMod, dadChecker, dadCounter, winner) 
           client.say(channel, 'nb dad now closed for 10 minutes.');
           client.say(channel, `/timeout ${ someScrub } 1200 Thanks for playing Kappa` );
           nbDad.dadChecker = true;
-          nbDad.someScrub = someScrub;
+          nbDad.someScrub = scrub;
           setTimeout(function() {
             nbDad.dadChecker = false;
             client.say(channel, 'nb dad now open OpieOP');
@@ -78,7 +85,7 @@ export function nbDad(client, userName, dadMod, dadChecker, dadCounter, winner) 
       } else if(dadChecker == false) {
           client.say(channel, `Dad has ${ dadCounter } inches of love for you today, ${ scrub  }.`);
       } else if(dadChecker == true) {
-          client.say(channel, `Some scrub by the name of ${ winner } won the damn game. Check back again later.`);
+          client.say(channel, `Some scrub by the name of ${ winnerScrub } won the damn game. Check back again later.`);
       }
   }
 }

@@ -18,14 +18,11 @@ const client = new tmi.Client({
 });
 
 // Global Variables, still have no idea what to do with them.
-var emoteCounter = 0;
-var intervalEmote = Math.floor((Math.random() * 10) + 1);
 var chatCounter = 0;
 var intervalChat = Math.floor((Math.random() * 50) + 1);
 var raceTracker = false;
 var dadChecker = false;
 var dadMod = false;
-var winner = '';
 var benggaCheck = false;
 var raeCheck = false;
 var kitzCheck = false;
@@ -34,7 +31,7 @@ var mochieCheck = false;
 // Connect Bot to Chat
 client.connect().then((data) => {
     console.log(`Bot has started.`);
-    setTimeout(function() { client.say('nightbox69', `I\'m awake boss, I\'m awake. Stop nudging the command prompt you old dying man.`); }, 5000);
+    setTimeout(function() { client.say('nightbox69', `I'm awake boss, I'm awake. Stop nudging the command prompt you old dying man.`); }, 5000);
 }).catch(console.error);
 
 // console.log reconnections
@@ -100,7 +97,7 @@ client.on('message', (channel, userstate, message, self) => {
       case 'dad':
         if(commands.nbDad.dadChecker == true) {
           dadChecker = true;
-          winner = commands.nbDad.someScrub;
+          var winner = commands.nbDad.someScrub;
         } else {
           dadChecker = false;
         }
@@ -131,8 +128,10 @@ client.on('message', (channel, userstate, message, self) => {
     commands.werpa(client, userName);
   }
 
-  if(userstate.username != 'botbox69' || userstate.username != 'nightbox69') {
-    chatCounter = chatCounter + 1;
+  if(userstate.username != 'botbox69') {
+    if( userstate.username != 'nightbox69'){
+      chatCounter = chatCounter + 1;
+    }
   }
 
   // Friend Plugs
