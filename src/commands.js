@@ -108,3 +108,20 @@ export function chatInterval(client, annoyCounter) {
       break;
   }
 }
+
+export function uptimeChatter(client, uptimeCounter) {
+  switch(uptimeCounter) {
+    case 1:
+      client.say(channel, `Since forever, ${ userstate.username } ... Since forever. :|`);
+    break;
+    case 2:
+      client.say(channel, `Why bother asking for uptime ${ userstate.username } The run won't survive anyway. :|`);
+    break;
+    case 3:
+      client.say(channel, 'Wonderful, a command that checks how long the boss is strimming when there is a freaking timer infront of their face.');
+    break;
+    case 4:
+      client.say(channel, 'The boss has been live since the 1989 Philippine Coup Attempt. And you can take that to the bank. PogChamp');
+    break;
+  }
+}

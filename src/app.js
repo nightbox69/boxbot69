@@ -123,26 +123,12 @@ client.on('message', (channel, userstate, message, self) => {
 
   if(payload == '!uptime') {
     var uptimeCounter = Math.floor((Math.random() * 4) + 1);
-    switch(uptimeCounter) {
-      case 1:
-        client.say(channel, `Since forever, ${ userstate.username } ... Since forever. :|`);
-      break;
-      case 2:
-        client.say(channel, `Why bother asking for uptime ${ userstate.username } The run won't survive anyway. :|`);
-      break;
-      case 3:
-        client.say(channel, 'Wonderful, a command that checks how long the boss is strimming when there is a freaking timer infront of their face.');
-      break;
-      case 4:
-        client.say(channel, 'The boss has been live since the 1989 Philippine Coup Attempt. And you can take that to the bank. PogChamp');
-      break;
-    }
+    commands.uptimeChatter(client, uptimeCounter);
   }
 
   if((payload.includes('petmalu') || payload.includes('werpa')) && userstate.mod == false) {
-    client.say(channel, `/timeout ${ userstate.username } 1`);
-    client.say(channel, 'You were saying something? Kappa');
-    client.action(channel, `hands ${ userstate.username } a dictionary. Kappa`);
+    userName = userstate.username;
+    commands.werpa(client, userName);
   }
 
   if(userstate.username != 'botbox69' || userstate.username != 'nightbox69') {
