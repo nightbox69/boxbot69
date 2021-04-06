@@ -1,2 +1,13 @@
 node_modules
+coverage
+dist
+.idea
+.vscode
+npm-debug.log
+.tmp
+.DS_Store
+yarn_error.log
+temp
+public
+docs
 oauth.js
