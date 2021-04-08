@@ -24,6 +24,11 @@ export function kitz(client) {
   client.say(channel, 'WHAT??? SHE VISITED??? Follow Kitz and her misadventures at https://twitch.tv/kitzcua');
 }
 
+export function mitchaki(client) {
+  client.say(channel, 'MITCHAKI!!! MITCHAKI!!! THE INTROVERTED VTUBER THAT RANDOMLY TRANSFORMS INTO A COSPLAYER HAS FINALLY COME OUT OF HER CAVE!!!');
+  client.say(channel, 'Watch this introvert of a vtuber with a shy low voice that randomly changes into a high pitched ikemen voice when shocked at https://twitch.tv/mitchakii');
+}
+
 export function balutchie(client) {
   client.say(channel, 'HAI BALUTCHIE!');
   client.say(channel, 'Follow Mochie and her never ending crystal mining for gacha husbandos at https://twitch.tv/mochiemadness');

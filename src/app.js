@@ -27,15 +27,17 @@ var benggaCheck = false;
 var raeCheck = false;
 var kitzCheck = false;
 var mochieCheck = false;
+var mitchakiCheck = false;
 var raceTracker = false;
 var payload;
 var splitPayload;
 var getCommand;
+var runnerList = [ 'nightbox69' ];
 
 // Connect Bot to Chat
 client.connect().then((data) => {
     console.log(`Bot has started.`);
-    //setTimeout(function() { client.say('nightbox69', `I'm awake boss, I'm awake. Stop nudging the command prompt you old dying man.`); }, 5000);
+    setTimeout(function() { client.say('nightbox69', `I'm awake boss, I'm awake. Stop nudging the command prompt you old dying man.`); }, 5000);
 }).catch(console.error);
 
 // console.log reconnections
@@ -46,11 +48,8 @@ client.on('reconnect', () => {
 // Read all messages
 client.on('message', (channel, userstate, message, self) => {
   if(self) return;
-  console.log(self);
   payload = message.toLowerCase();
   splitPayload = payload.split(' ');
-  console.log(splitPayload);
-  console.log(splitPayload.length);
   let confirmCommand = splitPayload[0];
 
   // It should count messages that aren't mine
@@ -63,7 +62,11 @@ client.on('message', (channel, userstate, message, self) => {
     if(splitPayload.length == 2) {
       getCommand = splitPayload[1];
     } else if(splitPayload.length >= 3) {
-      getCommand = `${splitPayload[1]} ${splitPayload[2]}`;
+      if(splitPayload[1] == 'shoutout') {
+        getCommand = splitPayload[1];
+      } else {
+        getCommand = `${splitPayload[1]} ${splitPayload[2]}`;
+      }
     }
     runCommands(client, userstate, getCommand, splitPayload);
   }
@@ -101,6 +104,11 @@ client.on('message', (channel, userstate, message, self) => {
     mochieCheck = true;
   }
 
+  if(userstate.username == 'mitchakii' && mitchakiCheck == false) {
+    plugs.mitchaki(client);
+    mitchakiCheck = true;
+  }
+
   if(chatCounter == intervalChat) {
     var annoyCounter = Math.floor((Math.random() * 7) + 1);
     commands.chatInterval(client, annoyCounter);
@@ -123,6 +131,12 @@ function runCommands(client, userstate, getCommand, splitPayload) {
     case 'bot off':
       commands.disconnect(client);
     break;
+    case 'shoutout':
+      commands.shoutOut(client, userstate, splitPayload);
+    break;
+    case 'race':
+      commands.race(client, raceTracker, runnerList);
+    break;
     case 'race setup':
       if(userstate.mod == true || userstate.badges.broadcaster == '1') {
         commands.raceOn(client, userstate);
@@ -134,9 +148,27 @@ function runCommands(client, userstate, getCommand, splitPayload) {
     case 'race off':
       if(userstate.mod == true || userstate.badges.broadcaster == '1') {
         commands.raceOff(client, userstate);
-        raceTracker = commands.raceOn.raceTracker;
+        raceTracker = commands.raceOff.raceTracker;
       } else {
         commands.raceOff(client, userstate);
+      }
+    break;
+    case 'add runner':
+      if(userstate.mod == true || userstate.badges.broadcaster == '1') {
+        commands.addRunner(client, userstate, splitPayload, runnerList);
+        runnerList = commands.addRunner.runnerList;
+        console.log(runnerList, 'app add');
+      } else {
+        commands.addRunner(client, userstate, splitPayload, runnerList);
+      }
+    break;
+    case 'remove runner':
+      if(userstate.mod == true || userstate.badges.broadcaster == '1') {
+        commands.deleteRunner(client, userstate, splitPayload, runnerList);
+        runnerList = commands.deleteRunner.runnerList;
+        console.log(runnerList, 'app delete');
+      } else {
+        commands.deleteRunner(client, userstate, splitPayload, runnerList);
       }
     break;
     // Memes
@@ -170,7 +202,6 @@ function runCommands(client, userstate, getCommand, splitPayload) {
       if(commands.nbDad.dadChecker == true) {
         dadChecker = true;
         var winner = commands.nbDad.winner;
-        console.log(dadChecker, winner);
       } else {
         dadChecker = false;
       }
@@ -211,9 +242,9 @@ client.on('giftpaidupgrade', (channel, username, sender, userstate) => {
   alerts.giftPaidUpgradeHandler(client, channel, username, sender, userstate);
 });
 
-client.on('hosting', (channel, target, viewers) => {
-  alerts.hostingHandler(client, channel, target, viewers);
-});
+//client.on('hosting', (channel, target, viewers) => {
+//  alerts.hostingHandler(client, channel, target, viewers);
+//});
 
 client.on('resub', (channel, username, months, message, userstate, methods) => {
   alerts.resubHandler(client, channel, username, months, message, userstate, methods);

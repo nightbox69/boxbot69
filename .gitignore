@@ -8,6 +8,8 @@ npm-debug.log
 .DS_Store
 .editorconfig
 yarn_error.log
+yarn-error.log
+yarn.log
 temp
 public
 docs

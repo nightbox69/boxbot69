@@ -1,5 +1,7 @@
 import { channel } from './oauth';
 
+
+// Important Commands
 export function intro(client) {
   client.say(channel, 'I am Botbox69, rioting Bot of zee Boss. Currently at version 1.2.0.');
 }
@@ -13,8 +15,33 @@ export function emulator(client) {
   client.say(channel, 'Runs are done on PSXFin - It has crashed multiple times already and will prolly continue until boss gets Lucky and PB. It also forces the boss from checking other windows or else the sound will be cutoff so any strim alerts will be thanked instead of checked. The only active windows the boss will have will be chat, his notes, livesplit and the emulator.');
 }
 
+export function race(client, raceTracker = false, runnerList = [ 'nightbox69' ]) {
+  var data = ''
+  if(raceTracker == true) {
+    for (var i = 0; i < runnerList.length; i++) {
+      data += runnerList[i] + '/';
+    }
+    client.say(channel, `Watch the other guys beat the snot out of my boss: https://www.multitwitch.tv/${data}`);
+  } else {
+    client.say(channel, "Boss is too scared to race.");
+  }
+}
+
+export function shoutOut(client, userstate, splitPayload) {
+  splitPayload = splitPayload[2];
+  console.log(splitPayload);
+  if(userstate.mod == true || userstate.username == 'nightbox69') {
+    if(splitPayload.startsWith('@')) {
+      splitPayload = splitPayload.substring(1);
+    }
+    client.say(channel, `Shoutouts to ${ splitPayload } playing/doing something I am unable to know because my boss is incompetent at coding. Please follow them at https://www.twitch.tv/${ splitPayload }`);
+  } else {
+    client.say(channel, 'You trying something? Keepo');
+  }
+}
+
 export function raceOn(client, userstate) {
-  if(userstate.mod == true || userstate.badges.broadcaster == '1') {
+  if(userstate.mod == true || userstate.username == 'nightbox69') {
     raceOn.raceTracker = true;
     client.say(channel, 'A race, huh? Think you can keep up?');
     client.say(channel, 'Command nb race is now active.');
@@ -24,7 +51,7 @@ export function raceOn(client, userstate) {
 }
 
 export function raceOff(client, userstate) {
-  if(userstate.mod == true || userstate.badges.broadcaster == '1') {
+  if(userstate.mod == true || userstate.username == 'nightbox69') {
     raceOff.raceTracker = false;
     client.say(channel, 'Everybody died?! DansGame');
   } else {
@@ -32,16 +59,43 @@ export function raceOff(client, userstate) {
   }
 }
 
-export function addRunner(client, message, userstate) {
-  if(userstate.mod == true || userstate.badges.broadcaster == '1') {
-    var getRunner = message.split(' ');
-    console.log(getRunner);
+export function addRunner(client, userstate, splitPayload, runnerList = [ 'nightbox69' ]) {
+  splitPayload = splitPayload[3];
+  if(userstate.mod == true || userstate.username == 'nightbox69') {
+    if(splitPayload.startsWith('@')) {
+      splitPayload = splitPayload.substring(1);
+    }
+    runnerList.push(splitPayload);
+    addRunner.runnerList = runnerList;
+    client.say(channel, `Runner ${ splitPayload } is added to race list`);
+  } else {
+    client.say(channel, 'You trying something? Keepo');
+  }
+}
+
+export function deleteRunner(client, userstate, splitPayload, runnerList = [ 'nightbox69' ]) {
+  splitPayload = splitPayload[3];
+  if(userstate.mod == true || userstate.username == 'nightbox69') {
+    if(splitPayload.startsWith('@')) {
+      splitPayload = splitPayload.substring(1);
+    }
+
+    var indexCheck = runnerList.indexOf(splitPayload);
+    console.log(indexCheck, 'indexCheck');
+    if(indexCheck > -1) {
+      runnerList.splice(indexCheck, 1);
+    }
+
+    deleteRunner.runnerList = runnerList;
+    console.log(deleteRunner.runnerList);
+    client.say(channel, `Runner ${ splitPayload } is deleted to race list`);
   } else {
     client.say(channel, 'You trying something? Keepo');
   }
 }
 
 
+// Meme Commands
 export function sandwich(userName, client) {
   if(userName != 'nightbox69') {
     client.action(channel, `makes ${ userName } a sandwich. NotLikeThis`);
@@ -164,7 +218,7 @@ export function uptimeChatter(client, uptimeCounter) {
 }
 
 export function modDad(client, userstate) {
-  if(userstate.mod == true || userstate.badges.broadcaster == '1') {
+  if(userstate.mod == true || userstate.username == 'nightbox69') {
     client.say(channel, 'nb dad is up. Kappa');
     dadMod = true;
   } else {
