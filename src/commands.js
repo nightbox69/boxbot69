@@ -1,4 +1,4 @@
-import { CHANNEL as channel } from './oauth';
+import { channel } from './oauth';
 
 export function intro(client) {
   client.say(channel, 'I am Botbox69, rioting Bot of zee Boss. Currently at version 1.2.0.');
@@ -12,6 +12,35 @@ export function disconnect(client) {
 export function emulator(client) {
   client.say(channel, 'Runs are done on PSXFin - It has crashed multiple times already and will prolly continue until boss gets Lucky and PB. It also forces the boss from checking other windows or else the sound will be cutoff so any strim alerts will be thanked instead of checked. The only active windows the boss will have will be chat, his notes, livesplit and the emulator.');
 }
+
+export function raceOn(client, userstate) {
+  if(userstate.mod == true || userstate.badges.broadcaster == '1') {
+    raceOn.raceTracker = true;
+    client.say(channel, 'A race, huh? Think you can keep up?');
+    client.say(channel, 'Command nb race is now active.');
+  } else {
+    client.say(channel, 'You trying something? Keepo');
+  }
+}
+
+export function raceOff(client, userstate) {
+  if(userstate.mod == true || userstate.badges.broadcaster == '1') {
+    raceOff.raceTracker = false;
+    client.say(channel, 'Everybody died?! DansGame');
+  } else {
+    client.say(channel, 'You trying something? Keepo');
+  }
+}
+
+export function addRunner(client, message, userstate) {
+  if(userstate.mod == true || userstate.badges.broadcaster == '1') {
+    var getRunner = message.split(' ');
+    console.log(getRunner);
+  } else {
+    client.say(channel, 'You trying something? Keepo');
+  }
+}
+
 
 export function sandwich(userName, client) {
   if(userName != 'nightbox69') {
@@ -62,31 +91,32 @@ export function werpa() {
   client.action(channel, `hands ${ userstate.username } a dictionary. Kappa`);
 }
 
-export function nbDad(client, userName, dadMod, dadChecker, dadCounter, winner) {
+export function nbDad(client, userName, dadMod, dadChecker, winner) {
   if(dadMod == true) {
-      var scrub = userName;
-      var winnerScrub = winner;
-      var dadCounter = Math.floor((Math.random() * 40) + 1);
-      if(dadCounter == 1 && dadChecker == false) {
-          var someLoserScrub = scrub
-          client.say(channel, `/timeout ${ someLoserScrub } 600 Nice Try` );
-          client.say(channel, `Wow, ${ someLoserScrub } just an inch?? GitGud. LUL`  );
-      } else if(dadCounter == 40 && dadChecker == false) {
-          var someScrub = scrub;
-          client.say(channel, `WINNER, WINNER ${ dadCounter } INCHES OF PURE PAIN FOR ${ someScrub }!! Eat that. LUL`);
-          client.say(channel, 'nb dad now closed for 10 minutes.');
-          client.say(channel, `/timeout ${ someScrub } 1200 Thanks for playing Kappa` );
-          nbDad.dadChecker = true;
-          nbDad.someScrub = scrub;
-          setTimeout(function() {
-            nbDad.dadChecker = false;
-            client.say(channel, 'nb dad now open OpieOP');
-          }, 600000);
-      } else if(dadChecker == false) {
-          client.say(channel, `Dad has ${ dadCounter } inches of love for you today, ${ scrub  }.`);
-      } else if(dadChecker == true) {
-          client.say(channel, `Some scrub by the name of ${ winnerScrub } won the damn game. Check back again later.`);
-      }
+    var scrub = userName;
+    var winnerScrub = winner;
+    var dadCounter = Math.floor((Math.random() * 40) + 1);
+    if(dadCounter == 1 && dadChecker == false) {
+      var someLoserScrub = scrub
+      client.say(channel, `/timeout ${ someLoserScrub } 600 Nice Try` );
+      client.say(channel, `Wow, ${ someLoserScrub } just an inch?? GitGud. LUL`  );
+    } else if(dadCounter == 40 && dadChecker == false) {
+      var someScrub = scrub;
+      client.say(channel, `WINNER, WINNER ${ dadCounter } INCHES OF PURE PAIN FOR ${ someScrub }!! Eat that. LUL`);
+      client.say(channel, 'nb dad now closed for 10 minutes.');
+      client.say(channel, `/timeout ${ someScrub } 1200 Thanks for playing Kappa` );
+      nbDad.dadChecker = true;
+      nbDad.winner = someScrub;
+      console.log(nbDad.dadChecker, nbDad.winner);
+      setTimeout(function() {
+        nbDad.dadChecker = false;
+        client.say(channel, 'nb dad now open OpieOP');
+      }, 600000);
+    } else if(dadChecker == false) {
+      client.say(channel, `Dad has ${ dadCounter } inches of love for you today, ${ scrub  }.`);
+    } else if(dadChecker == true) {
+      client.say(channel, `Some scrub by the name of ${ winnerScrub } won the damn game. Check back again later.`);
+    }
   }
 }
 
@@ -130,5 +160,14 @@ export function uptimeChatter(client, uptimeCounter) {
     case 4:
       client.say(channel, 'The boss has been live since the 1989 Philippine Coup Attempt. And you can take that to the bank. PogChamp');
     break;
+  }
+}
+
+export function modDad(client, userstate) {
+  if(userstate.mod == true || userstate.badges.broadcaster == '1') {
+    client.say(channel, 'nb dad is up. Kappa');
+    dadMod = true;
+  } else {
+    client.say(channel, 'You were trying something? Kappa');
   }
 }

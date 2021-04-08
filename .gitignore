@@ -6,6 +6,7 @@ dist
 npm-debug.log
 .tmp
 .DS_Store
+.editorconfig
 yarn_error.log
 temp
 public
