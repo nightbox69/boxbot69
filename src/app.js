@@ -242,9 +242,9 @@ client.on('giftpaidupgrade', (channel, username, sender, userstate) => {
   alerts.giftPaidUpgradeHandler(client, channel, username, sender, userstate);
 });
 
-//client.on('hosting', (channel, target, viewers) => {
-//  alerts.hostingHandler(client, channel, target, viewers);
-//});
+client.on('hosting', (channel, target, viewers) => {
+  alerts.hostingHandler(client, channel, target, viewers);
+});
 
 client.on('resub', (channel, username, months, message, userstate, methods) => {
   alerts.resubHandler(client, channel, username, months, message, userstate, methods);
