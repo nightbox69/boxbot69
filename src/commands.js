@@ -224,8 +224,3 @@ export function modDad(client, userstate) {
     client.say(channel, 'You were trying something? Kappa');
   }
 }
-
-export function discord(client) {
-  console.log(client);
-  client.say(channel, `Zee Boss has a discord channel. Shame on him but do join! https://discord.gg/Gw5r9S6`);
-};
