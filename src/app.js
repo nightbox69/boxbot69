@@ -67,7 +67,7 @@ client.on('message', (channel, userstate, message, self) => {
       } else {
         getCommand = `${splitPayload[1]} ${splitPayload[2]}`;
       }
-    }
+    };
     runCommands(client, userstate, getCommand, splitPayload);
   }
 
@@ -148,6 +148,7 @@ function runCommands(client, userstate, getCommand, splitPayload) {
     case 'race off':
       if(userstate.mod == true || userstate.badges.broadcaster == '1') {
         commands.raceOff(client, userstate);
+        runnerList = commands.raceOff.runnerList;
         raceTracker = commands.raceOff.raceTracker;
       } else {
         commands.raceOff(client, userstate);
@@ -157,7 +158,6 @@ function runCommands(client, userstate, getCommand, splitPayload) {
       if(userstate.mod == true || userstate.badges.broadcaster == '1') {
         commands.addRunner(client, userstate, splitPayload, runnerList);
         runnerList = commands.addRunner.runnerList;
-        console.log(runnerList, 'app add');
       } else {
         commands.addRunner(client, userstate, splitPayload, runnerList);
       }
@@ -166,7 +166,6 @@ function runCommands(client, userstate, getCommand, splitPayload) {
       if(userstate.mod == true || userstate.badges.broadcaster == '1') {
         commands.deleteRunner(client, userstate, splitPayload, runnerList);
         runnerList = commands.deleteRunner.runnerList;
-        console.log(runnerList, 'app delete');
       } else {
         commands.deleteRunner(client, userstate, splitPayload, runnerList);
       }

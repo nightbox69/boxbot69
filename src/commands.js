@@ -3,6 +3,7 @@ import { channel } from './oauth';
 
 // Important Commands
 export function intro(client) {
+  console.log(client);
   client.say(channel, 'I am Botbox69, rioting Bot of zee Boss. Currently at version 1.2.0.');
 }
 
@@ -53,6 +54,7 @@ export function raceOn(client, userstate) {
 export function raceOff(client, userstate) {
   if(userstate.mod == true || userstate.username == 'nightbox69') {
     raceOff.raceTracker = false;
+    raceOff.runnerList = [ 'nightbox69' ];
     client.say(channel, 'Everybody died?! DansGame');
   } else {
     client.say(channel, 'You trying something? Keepo');
@@ -81,13 +83,11 @@ export function deleteRunner(client, userstate, splitPayload, runnerList = [ 'ni
     }
 
     var indexCheck = runnerList.indexOf(splitPayload);
-    console.log(indexCheck, 'indexCheck');
     if(indexCheck > -1) {
       runnerList.splice(indexCheck, 1);
     }
 
     deleteRunner.runnerList = runnerList;
-    console.log(deleteRunner.runnerList);
     client.say(channel, `Runner ${ splitPayload } is deleted to race list`);
   } else {
     client.say(channel, 'You trying something? Keepo');
@@ -96,7 +96,7 @@ export function deleteRunner(client, userstate, splitPayload, runnerList = [ 'ni
 
 
 // Meme Commands
-export function sandwich(userName, client) {
+export function sandwich(client, userName) {
   if(userName != 'nightbox69') {
     client.action(channel, `makes ${ userName } a sandwich. NotLikeThis`);
     client.say(channel, 'BOSS, WHY DO I HAVE TO MAKE THEM A SANDWICH?!! DansGame');
@@ -105,7 +105,7 @@ export function sandwich(userName, client) {
   }
 }
 
-export function makemeasandwich(userName, client) {
+export function makemeasandwich(client, userName) {
   if(userName == 'nightbox69') {
     client.action(channel, `makes ${ userName } a sandwich. NotLikeThis`);
     client.say(channel, 'BibleThump BOT ABUSE BibleThump');
@@ -161,7 +161,6 @@ export function nbDad(client, userName, dadMod, dadChecker, winner) {
       client.say(channel, `/timeout ${ someScrub } 1200 Thanks for playing Kappa` );
       nbDad.dadChecker = true;
       nbDad.winner = someScrub;
-      console.log(nbDad.dadChecker, nbDad.winner);
       setTimeout(function() {
         nbDad.dadChecker = false;
         client.say(channel, 'nb dad now open OpieOP');
@@ -225,3 +224,8 @@ export function modDad(client, userstate) {
     client.say(channel, 'You were trying something? Kappa');
   }
 }
+
+export function discord(client) {
+  console.log(client);
+  client.say(channel, `Zee Boss has a discord channel. Shame on him but do join! https://discord.gg/Gw5r9S6`);
+};
