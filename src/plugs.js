@@ -1,4 +1,6 @@
-import { channel } from './oauth';
+import { CHANNEL } from './oauth.js';
+
+const channel = CHANNEL;
 
 export function discord(client) {
   client.say(channel, `Zee Boss has a Graveyard for a discord channel. Shame on him but do join! https://discord.gg/Gw5r9S6`);

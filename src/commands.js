@@ -1,5 +1,6 @@
-import { channel } from './oauth';
+import { CHANNEL } from './oauth.js';
 
+const channel = CHANNEL;
 
 // Important Commands
 export function intro(client) {
@@ -29,8 +30,8 @@ export function race(client, raceTracker = false, runnerList = [ 'nightbox69' ])
 }
 
 export function shoutOut(client, userstate, splitPayload) {
-  splitPayload = splitPayload[2];
-  console.log(splitPayload);
+  console.log(channel);
+  console.log(client.options);
   if(userstate.mod == true || userstate.username == 'nightbox69') {
     if(splitPayload.startsWith('@')) {
       splitPayload = splitPayload.substring(1);

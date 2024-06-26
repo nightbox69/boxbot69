@@ -1,5 +1,5 @@
 import tmi from 'tmi.js';
-import { USERNAME, TOKEN, CHANNEL } from './oauth';
+import { USERNAME, TOKEN, CHANNEL } from './oauth.js';
 import * as commands from './commands';
 import * as plugs from './plugs';
 import * as alerts from './alerts';
@@ -12,9 +12,9 @@ const client = new tmi.Client({
 	},
 	identity: {
 		username: USERNAME,
-		password: TOKEN
+		password: TOKEN,
 	},
-	channels: CHANNEL
+	channels: [ CHANNEL ]
 });
 
 // Global Variables, still have no idea what to do with them.
@@ -77,12 +77,6 @@ client.on('message', (channel, userstate, message, self) => {
     commands.uptimeChatter(client, uptimeCounter);
   }
 
-  // Ban people using words I'm annoyed at reading.
-  if((payload.includes('petmalu') || payload.includes('werpa')) && userstate.mod == false) {
-    userName = userstate.username;
-    commands.werpa(client, userName);
-  }
-
   // Friend Plugs
   if(userstate.username == 'rebengga' && benggaCheck == false) {
     plugs.rebengga(client);
@@ -132,7 +126,7 @@ function runCommands(client, userstate, getCommand, splitPayload) {
       commands.disconnect(client);
     break;
     case 'shoutout':
-      commands.shoutOut(client, userstate, splitPayload);
+      commands.shoutOut(client, userstate, splitPayload[2]);
     break;
     case 'race':
       commands.race(client, raceTracker, runnerList);
