@@ -5,9 +5,11 @@
   - Enter 'npm install' in the command line inside the folder.
   - Create an 'oauth.js' file in src with the following Lines
   - Take note that the your oauth should be the oauth code of your bot's twitch account:
-``export const USERNAME = '(bot username)';
+```
+export const USERNAME = '(bot username)';
 export const TOKEN = 'oauth:(bot oauth token)';
-export const CHANNEL = '#(channel username where the mod will be modding)';``
+export const CHANNEL = '#(channel username where the mod will be modding)';
+```
   -Enter 'node .' in the command line inside the folder.
 
 ### Getting your oauth
