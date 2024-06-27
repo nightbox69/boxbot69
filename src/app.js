@@ -164,7 +164,7 @@ function runCommands(client, userstate, getCommand, splitPayload) {
         commands.addRunner(client, userstate, splitPayload, runnerList);
       }
     break;
-    case 'remove runner':
+    case 'rm runner':
       if(userstate.mod == true || userstate.badges.broadcaster == '1') {
         commands.deleteRunner(client, userstate, splitPayload, runnerList);
         runnerList = commands.deleteRunner.runnerList;
