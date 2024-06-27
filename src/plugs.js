@@ -47,3 +47,5 @@ export function seika(client) {
   var channel = client.opts.channels[0];
   client.say(channel, 'Exercise is important. Do more ringfit strims. Build pyramids, spam her farm and spam Ringfit memes at https://twitch.tv/seika');
 };
+
+

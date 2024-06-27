@@ -1,11 +1,9 @@
 // Important Commands
 export function intro(client) {
-  console.log(client);
   client.say(client.opts.channels[0], 'I am Botbox69, rioting Bot of zee Boss. Currently at version 1.2.0.');
 }
 
 export function disconnect(client) {
-  console.log(client.opts.channels[0])
   client.say(client.opts.channels[0], 'Goodbye, friends.');
   client.disconnect();
   process.exit(0);
