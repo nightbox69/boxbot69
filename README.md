@@ -5,7 +5,6 @@ An annoying twitch bot. Made to be annoying, by the annoying.
 
 Current Features
 ----------------
-
 	Bot Commands
 	Whisper Commands
 	Host Notifications
@@ -15,12 +14,10 @@ Current Features
 
 Requirements
 ----------------
-
 	Node.js
 
 Installation and Usage
 ----------------
-
 	-Install Node.js 
 	-Enter 'npm install' in the command line inside the folder.
 	-Create an 'oauth.js' file in src with the following Lines
@@ -37,5 +34,4 @@ Installation and Usage
 
 Future Upgrades
 ---------------
-
 	I'm in the process of remembering every idiotic thing I've ever added and will most likely add it to documentation.

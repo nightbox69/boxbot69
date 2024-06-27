@@ -11,6 +11,7 @@ export function intro(client) {
 export function disconnect(client) {
   client.say(channel, 'Goodbye, friends.');
   client.disconnect();
+  process.exit(0);
 }
 
 export function emulator(client) {
@@ -94,7 +95,6 @@ export function deleteRunner(client, userstate, splitPayload, runnerList = [ 'ni
     client.say(channel, 'You trying something? Keepo');
   }
 }
-
 
 // Meme Commands
 export function sandwich(client, userName) {

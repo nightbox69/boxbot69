@@ -18,21 +18,21 @@ const client = new tmi.Client({
 });
 
 // Global Variables, still have no idea what to do with them.
-var chatCounter = 0;
-var intervalChat = Math.floor((Math.random() * 50) + 1);
-var raceTracker = false;
-var dadChecker = false;
-var dadMod = true;
-var benggaCheck = false;
-var raeCheck = false;
-var kitzCheck = false;
-var mochieCheck = false;
-var mitchakiCheck = false;
-var raceTracker = false;
-var payload;
-var splitPayload;
-var getCommand;
-var runnerList = [ 'nightbox69' ];
+let chatCounter = 0;
+let intervalChat = Math.floor((Math.random() * 50) + 1);
+let dadChecker = false;
+let dadMod = true;
+let benggaCheck = false;
+let kitzCheck = false;
+let mochieCheck = false;
+let mitchakiCheck = false;
+let raeCheck = false;
+let seikaCheck = false;
+let raceTracker = false;
+let payload;
+let splitPayload;
+let getCommand;
+let runnerList = [ 'nightbox69' ];
 
 // Connect Bot to Chat
 client.connect().then((data) => {
@@ -73,7 +73,7 @@ client.on('message', (channel, userstate, message, self) => {
 
   // Bullshit
   if(payload == '!uptime') {
-    var uptimeCounter = Math.floor((Math.random() * 4) + 1);
+    let uptimeCounter = Math.floor((Math.random() * 4) + 1);
     commands.uptimeChatter(client, uptimeCounter);
   }
 
@@ -81,11 +81,6 @@ client.on('message', (channel, userstate, message, self) => {
   if(userstate.username == 'rebengga' && benggaCheck == false) {
     plugs.rebengga(client);
     benggaCheck = true;
-  }
-
-  if(userstate.username == 'raeyei' && raeCheck == false) {
-    plugs.raeyei(client);
-    raeCheck = true;
   }
 
   if(userstate.username == 'kitzcua' && kitzCheck == false) {
@@ -103,8 +98,17 @@ client.on('message', (channel, userstate, message, self) => {
     mitchakiCheck = true;
   }
 
+  if(userstate.username == 'raeyei' && raeCheck == false) {
+    plugs.raeyei(client);
+    raeCheck = true;
+  }
+
+  if(userstate.username == 'seika' && seikaCheck == false) {
+    plugs.seika(client);
+    seikaCheck = true;
+  }
   if(chatCounter == intervalChat) {
-    var annoyCounter = Math.floor((Math.random() * 7) + 1);
+    let annoyCounter = Math.floor((Math.random() * 7) + 1);
     commands.chatInterval(client, annoyCounter);
     intervalChat = intervalChat + Math.floor((Math.random() * 200) + 1);
   }
@@ -123,7 +127,11 @@ function runCommands(client, userstate, getCommand, splitPayload) {
       commands.notes(client);
     break;
     case 'bot off':
-      commands.disconnect(client);
+      if(userstate.mod == true || userstate.badges.broadcaster == '1') {
+        commands.disconnect(client);
+      } else {
+        client.say(channel, `/timeout ${ userstate.username } 30 How dare you D:` );
+      }
     break;
     case 'shoutout':
       commands.shoutOut(client, userstate, splitPayload[2]);
@@ -194,7 +202,7 @@ function runCommands(client, userstate, getCommand, splitPayload) {
     case 'dad':
       if(commands.nbDad.dadChecker == true) {
         dadChecker = true;
-        var winner = commands.nbDad.winner;
+        let winner = commands.nbDad.winner;
       } else {
         dadChecker = false;
       }

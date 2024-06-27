@@ -36,3 +36,7 @@ export function balutchie(client) {
   client.say(channel, 'Follow Mochie and her never ending crystal mining for gacha husbandos at https://twitch.tv/mochiemadness');
   client.say(channel, 'BAI BALUTCHIE!');
 };
+
+export function seika(client) {
+  client.say(channel, 'Exercise is important. Do ringfit strims. Build pyramids and spam her farm at https://twitch.tv/seika');
+};
