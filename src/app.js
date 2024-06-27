@@ -43,7 +43,7 @@ client.connect().then((data) => {
 // console.log reconnections
 client.on('reconnect', () => {
   reconnectHandler()
-})
+});
 
 // Read all messages
 client.on('message', (channel, userstate, message, self) => {
@@ -55,7 +55,7 @@ client.on('message', (channel, userstate, message, self) => {
   // It should count messages that aren't mine
   if(userstate.username != 'nightbox69') {
     chatCounter = chatCounter + 1;
-  }
+  };
 
   // Confirms command starts with nb
   if(confirmCommand == 'nb') {
@@ -69,49 +69,49 @@ client.on('message', (channel, userstate, message, self) => {
       }
     };
     runCommands(client, userstate, getCommand, splitPayload);
-  }
+  };
 
   // Bullshit
   if(payload == '!uptime') {
     let uptimeCounter = Math.floor((Math.random() * 4) + 1);
     commands.uptimeChatter(client, uptimeCounter);
-  }
+  };
 
   // Friend Plugs
   if(userstate.username == 'rebengga' && benggaCheck == false) {
     plugs.rebengga(client);
     benggaCheck = true;
-  }
+  };
 
   if(userstate.username == 'kitzcua' && kitzCheck == false) {
     plugs.kitz(client);
     kitzCheck = true;
-  }
+  };
 
   if(userstate.username == 'mochiemadness' && mochieCheck == false) {
     plugs.balutchie(client);
     mochieCheck = true;
-  }
+  };
 
   if(userstate.username == 'mitchakii' && mitchakiCheck == false) {
     plugs.mitchaki(client);
     mitchakiCheck = true;
-  }
+  };
 
   if(userstate.username == 'raeyei' && raeCheck == false) {
     plugs.raeyei(client);
     raeCheck = true;
-  }
+  };
 
   if(userstate.username == 'seika' && seikaCheck == false) {
     plugs.seika(client);
     seikaCheck = true;
-  }
+  };
   if(chatCounter == intervalChat) {
     let annoyCounter = Math.floor((Math.random() * 7) + 1);
     commands.chatInterval(client, annoyCounter);
     intervalChat = intervalChat + Math.floor((Math.random() * 200) + 1);
-  }
+  };
 });
 
 function runCommands(client, userstate, getCommand, splitPayload) {
@@ -127,11 +127,11 @@ function runCommands(client, userstate, getCommand, splitPayload) {
       commands.notes(client);
     break;
     case 'bot off':
-      if(userstate.mod == true || userstate.badges.broadcaster == '1') {
+      if(userstate.username == 'nightbox69') {
         commands.disconnect(client);
-      } else {
+      } else if (userstate.mod == false){
         client.say(channel, `/timeout ${ userstate.username } 30 How dare you D:` );
-      }
+      };
     break;
     case 'shoutout':
       commands.shoutOut(client, userstate, splitPayload[2]);
@@ -140,37 +140,30 @@ function runCommands(client, userstate, getCommand, splitPayload) {
       commands.race(client, raceTracker, runnerList);
     break;
     case 'race setup':
-      if(userstate.mod == true || userstate.badges.broadcaster == '1') {
-        commands.raceOn(client, userstate);
+      console.log(userstate);
+      commands.raceOn(client, userstate);
+      if(userstate.mod == true || userstate.username == 'nightbox69') {
         raceTracker = commands.raceOn.raceTracker;
-      } else {
-        commands.raceOn(client, userstate);
-      }
+      };
     break;
     case 'race off':
-      if(userstate.mod == true || userstate.badges.broadcaster == '1') {
-        commands.raceOff(client, userstate);
+      commands.raceOff(client, userstate);
+      if(userstate.mod == true || userstate.username == 'nightbox69') {
         runnerList = commands.raceOff.runnerList;
         raceTracker = commands.raceOff.raceTracker;
-      } else {
-        commands.raceOff(client, userstate);
-      }
+      };
     break;
     case 'add runner':
-      if(userstate.mod == true || userstate.badges.broadcaster == '1') {
-        commands.addRunner(client, userstate, splitPayload, runnerList);
+      commands.addRunner(client, userstate, splitPayload, runnerList);
+      if(userstate.mod == true || userstate.username == 'nightbox69') {
         runnerList = commands.addRunner.runnerList;
-      } else {
-        commands.addRunner(client, userstate, splitPayload, runnerList);
-      }
+      };
     break;
     case 'rm runner':
-      if(userstate.mod == true || userstate.badges.broadcaster == '1') {
-        commands.deleteRunner(client, userstate, splitPayload, runnerList);
+      commands.deleteRunner(client, userstate, splitPayload, runnerList);
+      if(userstate.mod == true || userstate.username == 'nightbox69') {
         runnerList = commands.deleteRunner.runnerList;
-      } else {
-        commands.deleteRunner(client, userstate, splitPayload, runnerList);
-      }
+      };
     break;
     // Memes
     case 'sandwich':
@@ -219,8 +212,8 @@ function runCommands(client, userstate, getCommand, splitPayload) {
     case 'twitter':
       plugs.twitter(client);
     break;
-  }
-}
+  };
+};
 
 // Alerts Functions
 client.on('hosted', (channel, username, viewers, autohost) => {

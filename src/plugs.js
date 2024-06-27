@@ -14,7 +14,7 @@ export function twitter(client) {
 
 export function rebengga(client) {
   var channel = client.opts.channels[0];
-  client.say(channel, 'Oh, this idiotic loser. :| https://imgur.com/275ArTc follow the moron at https://facebook.com/rebenggalol');
+  client.say(channel, 'Oh, this idiotic loser. :| https://imgur.com/275ArTc follow the moron at https://twitch.tv/rebengga');
 };
 
 export function raeyei(client) {
@@ -30,16 +30,13 @@ export function kitz(client) {
 export function mitchaki(client) {
   var channel = client.opts.channels[0];
   client.say(channel, 'MITCHAKI!!! MITCHAKI!!! THE INTROVERTED VTUBER THAT RANDOMLY TRANSFORMS INTO A COSPLAYER HAS FINALLY COME OUT OF HER CAVE!!!');
-  var channel = client.opts.channels[0];
   client.say(channel, 'Watch this introvert of a vtuber with a shy low voice that randomly changes into a high pitched ikemen voice when shocked at https://twitch.tv/mitchakii');
 };
 
 export function balutchie(client) {
   var channel = client.opts.channels[0];
   client.say(channel, 'HAI BALUTCHIE!');
-  var channel = client.opts.channels[0];
   client.say(channel, 'Follow Mochie and her never ending crystal mining for gacha husbandos at https://twitch.tv/mochiemadness');
-  var channel = client.opts.channels[0];
   client.say(channel, 'BAI BALUTCHIE!');
 };
 
