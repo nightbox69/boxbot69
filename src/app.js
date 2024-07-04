@@ -1,5 +1,5 @@
 import tmi from 'tmi.js';
-import { USERNAME, TOKEN, CHANNEL } from './oauth.js';
+import { USERNAME, TOKEN, CHANNEL, BROADCASTER } from './oauth.js';
 import * as commands from './commands';
 import * as plugs from './plugs';
 import * as alerts from './alerts';
@@ -32,13 +32,21 @@ let raceTracker = false;
 let payload;
 let splitPayload;
 let getCommand;
-let channelName = CHANNEL;
+<<<<<<< HEAD
+<<<<<<< HEAD
+let channelName = BROADCASTER;
 let runnerList = [ channelName ];
+=======
+let runnerList = [ 'nightbox69' ];
+>>>>>>> parent of 4d58aa2 (Fix Broadcaster names for centralization, Fix documentation errors, update Notes command)
+=======
+let runnerList = [ 'nightbox69' ];
+>>>>>>> parent of 4d58aa2 (Fix Broadcaster names for centralization, Fix documentation errors, update Notes command)
 
 // Connect Bot to Chat
 client.connect().then((data) => {
     console.log(`Bot has started.`);
-    setTimeout(function() { client.say(channel, `I'm awake boss, I'm awake. Stop nudging the command prompt you old dying man.`); }, 5000);
+    setTimeout(function() { client.say('nightbox69', `I'm awake boss, I'm awake. Stop nudging the command prompt you old dying man.`); }, 5000);
 }).catch(console.error);
 
 // console.log reconnections
@@ -54,7 +62,7 @@ client.on('message', (channel, userstate, message, self) => {
   let confirmCommand = splitPayload[0];
 
   // It should count messages that aren't mine
-  if(userstate.username != channelName) {
+  if(userstate.username != 'nightbox69') {
     chatCounter = chatCounter + 1;
   };
 
@@ -128,7 +136,7 @@ function runCommands(client, userstate, getCommand, splitPayload) {
       commands.notes(client);
     break;
     case 'bot off':
-      if(userstate.username == channelName) {
+      if(userstate.username == 'nightbox69') {
         commands.disconnect(client);
       } else if (userstate.mod == false){
         client.say(channel, `/timeout ${ userstate.username } 30 How dare you D:` );
@@ -143,26 +151,26 @@ function runCommands(client, userstate, getCommand, splitPayload) {
     case 'race setup':
       console.log(userstate);
       commands.raceOn(client, userstate);
-      if(userstate.mod == true || userstate.username == channelName) {
+      if(userstate.mod == true || userstate.username == 'nightbox69') {
         raceTracker = commands.raceOn.raceTracker;
       };
     break;
     case 'race off':
       commands.raceOff(client, userstate);
-      if(userstate.mod == true || userstate.username == channelName) {
+      if(userstate.mod == true || userstate.username == 'nightbox69') {
         runnerList = commands.raceOff.runnerList;
         raceTracker = commands.raceOff.raceTracker;
       };
     break;
     case 'add runner':
       commands.addRunner(client, userstate, splitPayload, runnerList);
-      if(userstate.mod == true || userstate.username == channelName) {
+      if(userstate.mod == true || userstate.username == 'nightbox69') {
         runnerList = commands.addRunner.runnerList;
       };
     break;
     case 'rm runner':
       commands.deleteRunner(client, userstate, splitPayload, runnerList);
-      if(userstate.mod == true || userstate.username == channelName) {
+      if(userstate.mod == true || userstate.username == 'nightbox69') {
         runnerList = commands.deleteRunner.runnerList;
       };
     break;
